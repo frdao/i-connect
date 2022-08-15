@@ -1,0 +1,8 @@
+{
+  "name": "iConnect",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react",
+  "id": "6ffdce81"
+}
