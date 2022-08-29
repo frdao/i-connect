@@ -1,29 +1,35 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import { IonContent, IonPage, IonButton, IonGrid, IonRow, IonCol, IonHeader, IonInput } from '@ionic/react';
 import './Login.css';
 
 type Props = {
-	auth: boolean;
 	setAuth: (val: boolean) => void;
 };
 
-const Login: React.FC<Props> = ({auth, setAuth}) => {
+const Login: React.FC<Props> = ({setAuth}) => {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Login</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Login</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name="Login page" />
-      </IonContent>
-			<IonButton color="secondary" onClick={() => setAuth(true)}>Log In</IonButton>
+				<IonGrid className='loginGrid'>
+					<IonRow>
+						<IonCol>
+							<IonHeader className='loginHeader'>Log In</IonHeader>
+						</IonCol>
+					</IonRow>
+					<IonRow>
+						<IonCol>
+							<IonInput className="userInput" placeholder='Email'></IonInput>
+						</IonCol>
+					</IonRow>
+					<IonRow>
+						<IonCol>
+							<IonInput className="userInput" placeholder='Password'></IonInput>
+						</IonCol>
+					</IonRow>
+					<IonRow>
+						<IonCol>
+							<IonButton className="loginButton" color="secondary" onClick={() => setAuth(true)}>Log In</IonButton>
+						</IonCol>
+					</IonRow>
+				</IonGrid>
     </IonPage>
   );
 };
