@@ -122,7 +122,7 @@ const Tab2: React.FC<Props> = ({profile, SetNewProfile}) => {
             </IonCardHeader>
             <br />
             <IonCardContent className="ion-padding">
-            <h1>Hello!</h1>
+            <h1>{profile.descriptionTitle}</h1>
             <p color="dark">
               {profile.description}
             </p>
