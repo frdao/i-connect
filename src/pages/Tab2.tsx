@@ -1,14 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import {
-    IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
-    IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle,
-    IonCardContent, IonItem, IonImg, IonIcon, IonLabel, IonButton,
-    createGesture, Gesture, GestureConfig
-} from '@ionic/react';
-import { pin, wifi, wine, warning, walk } from 'ionicons/icons';
-import ExploreContainer from '../components/ExploreContainer';
+    IonContent, IonHeader, IonPage, IonTitle, IonToolbar} from '@ionic/react';
 import './Tab2.css';
-import { IonicReactExternalProps } from '@ionic/react/dist/types/components/utils';
 import SwipeCard from "../components/SwipeCard";
 import  {Profile}  from "../components/Profile";
 

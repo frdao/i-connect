@@ -1,9 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import {
-    IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
     IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle,
-    IonCardContent, IonItem, IonImg, IonIcon, IonLabel, IonButton,
-    createGesture, Gesture, GestureConfig, IonInput, IonTextarea
+    IonCardContent, IonInput, IonTextarea
 } from '@ionic/react';
 import { Profile } from "./Profile";
 

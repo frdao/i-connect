@@ -10,10 +10,12 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { chatbubbleOutline, ellipse, person, personAddOutline, schoolOutline, square, triangle } from 'ionicons/icons';
+import { chatbubbleOutline, person, schoolOutline} from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
+import Login from './pages/Login';
+import { useIsAuthenticated } from "@azure/msal-react";
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -36,7 +38,7 @@ import './theme/variables.css';
 
 setupIonicReact();
 
-const App: React.FC = () => (
+const LoggedIn: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonTabs>
@@ -72,5 +74,20 @@ const App: React.FC = () => (
     </IonReactRouter>
   </IonApp>
 );
+
+const App: React.FC = () => {
+
+  const isAuthenticated = useIsAuthenticated();
+
+  if(isAuthenticated) {
+    return(
+      <LoggedIn/>
+      )
+  } else {
+    return (
+      <Login/>
+    )
+  }
+};
 
 export default App;

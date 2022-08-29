@@ -1,14 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import {
-    IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
     IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle,
-    IonCardContent, IonItem, IonImg, IonIcon, IonLabel, IonButton,
-    createGesture, Gesture, GestureConfig
+    IonCardContent, createGesture
 } from '@ionic/react';
-import { pin, wifi, wine, warning, walk } from 'ionicons/icons';
-import ExploreContainer from '../components/ExploreContainer';
 import './SwipeCard.css';
-import { IonicReactExternalProps } from '@ionic/react/dist/types/components/utils';
 import {Profile}  from "./Profile";
 
 type Props = {

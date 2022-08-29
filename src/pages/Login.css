@@ -1,0 +1,16 @@
+.loginGrid {
+    max-width: 300px;
+    position: relative;
+}
+
+.loginHeader {
+    text-align: center;
+}
+
+.userInput {
+    border-bottom: 1px solid white;
+}
+
+Ion-Button {
+    width: 100%;
+}

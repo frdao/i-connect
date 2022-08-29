@@ -1,7 +1,6 @@
-import { IonButton, IonButtons, IonCard, IonContent, IonHeader, IonIcon, IonMenuButton, IonPage, IonTitle, IonToolbar, useIonToast } from '@ionic/react';
+import { IonCard, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, useIonToast } from '@ionic/react';
 import { checkmarkDoneOutline, createOutline } from 'ionicons/icons';
 import { useState } from 'react';
-import ExploreContainer from '../components/ExploreContainer';
 import { Profile } from '../components/Profile';
 import ProfileCard from '../components/ProfileCard';
 import './Tab3.css';
