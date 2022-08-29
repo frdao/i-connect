@@ -15,6 +15,7 @@ import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 import Login from './pages/Login';
+import { useIsAuthenticated } from "@azure/msal-react";
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -34,7 +35,6 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import {useState} from 'react';
 
 setupIonicReact();
 
@@ -77,15 +77,15 @@ const LoggedIn: React.FC = () => (
 
 const App: React.FC = () => {
 
-  const [auth, setAuth] = useState<boolean>(false);
+  const isAuthenticated = useIsAuthenticated();
 
-  if(!auth) {
+  if(isAuthenticated) {
     return(
-      <Login setAuth={setAuth}/>
-    )
+      <LoggedIn/>
+      )
   } else {
     return (
-      <LoggedIn/>
+      <Login/>
     )
   }
 };
