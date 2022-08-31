@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import {
     IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle,
-    IonCardContent, createGesture
+    IonCardContent, createGesture, IonItemDivider, IonLabel, IonImg, IonIcon
 } from '@ionic/react';
 import './SwipeCard.css';
 import {Profile}  from "./Profile";
+import { logoLinkedin } from "ionicons/icons";
 
 type Props = {
 	profile: Profile; 
@@ -112,7 +113,10 @@ const Tab2: React.FC<Props> = ({profile, SetNewProfile}) => {
          <IonCard id="swipeCardBackground">
             <IonCardHeader id="swipeCardHeader">
               <IonCardTitle color="dark">{profile.name}</IonCardTitle>
+              <IonCardSubtitle color="dark">{profile.email}</IonCardSubtitle>
               <IonCardSubtitle color="dark">{profile.education}</IonCardSubtitle>
+              <IonCardSubtitle color="dark">{profile.isEmployer ? "Employer" : "Job seeker"}</IonCardSubtitle>
+              <IonCardSubtitle color="dark">{profile.phoneNumber}</IonCardSubtitle>
               <br />
             </IonCardHeader>
             <br />
@@ -123,7 +127,9 @@ const Tab2: React.FC<Props> = ({profile, SetNewProfile}) => {
             </p>
               
             </IonCardContent>
-
+            <IonItemDivider color="dark">
+                <a href={profile.linkedInUrl}><IonIcon icon={logoLinkedin}></IonIcon></a>
+            </IonItemDivider>
         </IonCard>
         </div>
   );

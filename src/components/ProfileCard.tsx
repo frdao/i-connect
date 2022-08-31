@@ -1,9 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import {
     IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle,
-    IonCardContent, IonInput, IonTextarea
+    IonCardContent, IonInput, IonTextarea, IonItemDivider, IonIcon
 } from '@ionic/react';
 import { Profile } from "./Profile";
+import { logoLinkedin } from "ionicons/icons";
+import './ProfileCard.css';
 
 type Props = {
 	profile: Profile; 
@@ -16,6 +18,7 @@ const ProfileCard: React.FC<Props> = ({profile, editMode}) => {
     let profileCardStyle:CSSStyleDeclaration;
     let profileCardBackgroundStyle:CSSStyleDeclaration;
     let profileCardHeaderStyle:CSSStyleDeclaration;
+
     useEffect(() => {
 
         if (profileCard.current) {
@@ -45,7 +48,14 @@ const ProfileCard: React.FC<Props> = ({profile, editMode}) => {
                 <IonCardHeader id="profileCardHeader">
                   <IonCardTitle color="dark">{profile.name}</IonCardTitle>
                   <IonCardSubtitle color="dark">
+                    <IonInput onIonChange={e => profile.email = e.detail.value!} value={profile.email}></IonInput>
+                  </IonCardSubtitle>
+                  <IonCardSubtitle color="dark">
                     <IonInput onIonChange={e => profile.education = e.detail.value!} value={profile.education}></IonInput>
+                  </IonCardSubtitle>
+                  <IonCardSubtitle color="dark">{profile.isEmployer ? "Employer" : "Job seeker"}</IonCardSubtitle>
+                  <IonCardSubtitle color="dark">
+                    <IonInput onIonChange={e => profile.phoneNumber = parseInt(e.detail.value!)} value={profile.phoneNumber.toString()}></IonInput>
                   </IonCardSubtitle>
                   <br />
                 </IonCardHeader>
@@ -57,6 +67,9 @@ const ProfileCard: React.FC<Props> = ({profile, editMode}) => {
                 <p color="dark">
                   <IonTextarea autoGrow onIonChange={e => profile.description = e.detail.value!} value={profile.description}></IonTextarea>
                 </p>
+                <IonItemDivider color="dark">
+                  <IonInput onIonChange={e => profile.linkedInUrl = e.detail.value!} value={profile.linkedInUrl}></IonInput>
+                </IonItemDivider>
                 </IonCardContent>
             </IonCard>
             </div>
@@ -68,7 +81,10 @@ const ProfileCard: React.FC<Props> = ({profile, editMode}) => {
              <IonCard id="profileCardBackground">
                 <IonCardHeader id="profileCardHeader">
                   <IonCardTitle color="dark">{profile.name}</IonCardTitle>
+                  <IonCardSubtitle color="dark">{profile.email}</IonCardSubtitle>
                   <IonCardSubtitle color="dark">{profile.education}</IonCardSubtitle>
+                  <IonCardSubtitle color="dark">{profile.isEmployer ? "Employer" : "Job seeker"}</IonCardSubtitle>
+                  <IonCardSubtitle color="dark">{profile.phoneNumber}</IonCardSubtitle>
                   <br />
                 </IonCardHeader>
                 <br />
@@ -79,7 +95,9 @@ const ProfileCard: React.FC<Props> = ({profile, editMode}) => {
                 </p>
                   
                 </IonCardContent>
-    
+                <IonItemDivider color="dark">
+                  <a href={profile.linkedInUrl}><IonIcon icon={logoLinkedin}></IonIcon></a>
+                </IonItemDivider>
             </IonCard>
             </div>
         );
