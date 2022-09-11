@@ -35,9 +35,11 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import { UserInformation } from './components/UserInformation';
+import Register from './pages/Register';
 
 setupIonicReact();
-
+const userInformation = new UserInformation();
 const LoggedIn: React.FC = () => (
   <IonApp>
     <IonReactRouter>
@@ -79,11 +81,17 @@ const App: React.FC = () => {
 
   const isAuthenticated = useIsAuthenticated();
 
-  if(isAuthenticated) {
+  if (userInformation.getProfile() != null) {
+    return(
+      <Register userInformation={userInformation} />
+    )
+  }
+  else if(isAuthenticated) {
     return(
       <LoggedIn/>
       )
-  } else {
+  } 
+  else {
     return (
       <Login/>
     )
