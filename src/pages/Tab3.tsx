@@ -3,9 +3,14 @@ import { checkmarkDoneOutline, createOutline } from 'ionicons/icons';
 import { useState } from 'react';
 import { Profile } from '../components/Profile';
 import ProfileCard from '../components/ProfileCard';
+import { UserInformation } from '../components/UserInformation';
 import './Tab3.css';
 
-const Tab3: React.FC = () => {
+type Props = {
+	userInformation: UserInformation
+};
+
+const Tab3: React.FC<Props> = (userInformation) => {
   const [presentToast, dismissToast] = useIonToast();
   const [editMode, setEditMode] = useState(false);
   const [userProfile, setUserProfile] = useState<Profile>(new Profile("Francis Dao", 24, "fddao@outlook.com", 97883832, "https://no.linkedin.com/in/fddao",

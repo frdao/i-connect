@@ -37,58 +37,67 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { UserInformation } from './components/UserInformation';
 import Register from './pages/Register';
+import { useState } from 'react';
 
 setupIonicReact();
-const userInformation = new UserInformation();
-const LoggedIn: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/tab1">
-            <Tab1 />
-          </Route>
-          <Route exact path="/tab2">
-            <Tab2 />
-          </Route>
-          <Route path="/tab3">
-            <Tab3 />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/tab1" />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon icon={chatbubbleOutline} />
-            <IonLabel>Connect</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={schoolOutline} />
-            <IonLabel>Swipe</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon icon={person} />
-            <IonLabel>Profile</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+
+type Props = {
+	userInformation: UserInformation
+};
+
+
+const LoggedIn: React.FC<Props> = (userInformation) => {
+  
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route exact path="/tab1">
+              <Tab1 />
+            </Route>
+            <Route exact path="/tab2">
+              <Tab2 />
+            </Route>
+            <Route path="/tab3">
+              <Tab3 userInformation={userInformation.userInformation} />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/tab1" />
+            </Route>
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="tab1" href="/tab1">
+              <IonIcon icon={chatbubbleOutline} />
+              <IonLabel>Connect</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="tab2" href="/tab2">
+              <IonIcon icon={schoolOutline} />
+              <IonLabel>Swipe</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="tab3" href="/tab3">
+              <IonIcon icon={person} />
+              <IonLabel>Profile</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+  )
+};
 
 const App: React.FC = () => {
-
   const isAuthenticated = useIsAuthenticated();
+  const [userInformation, setUserInformation] = useState(new UserInformation());
 
   if (userInformation.getProfile() != null) {
     return(
-      <Register userInformation={userInformation} />
+      <Register setUserInformation={setUserInformation} />
     )
   }
   else if(isAuthenticated) {
     return(
-      <LoggedIn/>
+      <LoggedIn userInformation={userInformation}/>
       )
   } 
   else {

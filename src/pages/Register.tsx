@@ -7,10 +7,10 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 type Props = {
-	  userInformation: UserInformation; 
+	  setUserInformation: (userInformation: UserInformation) =>  void; 
 };
 
-const Register: React.FC<Props> = ({userInformation}) => {
+const Register: React.FC<Props> = ({setUserInformation}) => {
 
   const profileForm = {
     name: "Navn Navnesen",
@@ -35,9 +35,10 @@ const Register: React.FC<Props> = ({userInformation}) => {
       profileForm.descriptionTitle, profileForm.description, 
       profileForm.isEmployer
     );
-    userInformation.setProfile(profile); 
-    setIsUserCreated(true);
-    console.log(userInformation.getProfile());
+    const userInformation = new UserInformation();
+    userInformation.setProfile(profile);
+
+    setUserInformation(userInformation);
 
     //------ UPDATE TO DATABASE ------- //
 
@@ -118,15 +119,16 @@ const Register: React.FC<Props> = ({userInformation}) => {
             <IonButton onClick={() => openLibrary()}>Upload Profile Image</IonButton>
           </IonItem>
           <IonItem>
-          {isUserCreated ? (
+          <IonButton onClick={() => createProfile()}>Create Profile</IonButton>
+          {/* {isUserCreated ? (
             <IonButton href="/">Continue</IonButton>
           ) : (
             <IonButton onClick={() => createProfile()}>Create Profile</IonButton>
-          )}
+          )} */}
           </IonItem>
-          <IonItem>
+          {/* <IonItem>
             <IonButton onClick={() => console.log(userInformation.getProfile())}>Check info</IonButton>
-          </IonItem>
+          </IonItem> */}
         </IonList>
       </IonContent>      
       
