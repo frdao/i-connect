@@ -1,0 +1,10 @@
+.mainContainer{
+    border-style: solid;
+    border-color: white;
+}
+
+.conversation{
+    border-style: solid;
+    border-color: white;
+    height: 10%;
+}
