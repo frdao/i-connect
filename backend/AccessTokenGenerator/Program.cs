@@ -13,7 +13,7 @@ namespace AccessTokenGenerator
 
             // Gets connectionstring from and environmental variable
             //TODO: Use Azure Active Directory instead for production as this is temp for testing purposes
-            string? connectionString = Environment.GetEnvironmentVariable("COMMUNICATION_SERVICES_CONNECTION_STRING");
+            string? connectionString = Environment.GetEnvironmentVariable("CUSTOMCONNSTR_COMMUNICATION_SERVICES");
             if(connectionString is null) throw new NullReferenceException(nameof(connectionString));
 
             var client = new CommunicationIdentityClient(connectionString);
