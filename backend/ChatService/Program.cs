@@ -9,13 +9,16 @@ namespace ChatService
     {
         static async System.Threading.Tasks.Task Main(string[] args)
         {
-            // TESTING
-            CreateChatThreadResult thread = await ChatThread.CreateChatThread(
-                Constants.Player1.Id,
-                Constants.Player1.Token
-            );
+            var UserAndToken = AccessTokenGenerator.CreateUserAndToken();
+            Console.WriteLine(UserAndToken);
 
-            Console.WriteLine($"{thread}");
+            // TESTING
+            //CreateChatThreadResult thread = await ChatThread.CreateChatThread(
+            //    Constants.Player1.Id,
+            //    Constants.Player1.Token
+            //);
+
+            //Console.WriteLine($"{thread}");
         }
             
     }
