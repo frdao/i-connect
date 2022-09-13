@@ -1,21 +1,24 @@
-import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonItemDivider, IonLabel, IonList, IonPage, IonSegment, IonSegmentButton, IonTextarea, IonTitle, IonToolbar } from "@ionic/react";
+import { IonButton, IonContent, IonHeader, IonImg, IonInput, IonItem, IonItemDivider, IonLabel, IonList, IonPage, IonSegment, IonSegmentButton, IonTextarea, IonThumbnail, IonTitle, IonToolbar } from "@ionic/react";
 import { Profile } from "../components/Profile";
 import { UserInformation } from "../components/UserInformation";
 import './Register.css';
 import { ImagePicker } from '@awesome-cordova-plugins/image-picker';
-import { Link } from "react-router-dom";
+import { AccountInfo } from "@azure/msal-browser";
+import { Camera, CameraResultType } from '@capacitor/camera';
 import { useState } from "react";
 
 type Props = {
-	  setUserInformation: (userInformation: UserInformation) =>  void; 
+	  setUserInformation: (userInformation: UserInformation) =>  void;
+    account: AccountInfo 
 };
 
-const Register: React.FC<Props> = ({setUserInformation}) => {
+const Register: React.FC<Props> = ({setUserInformation, account}) => {
 
   const profileForm = {
-    name: "Navn Navnesen",
+    id: account.tenantId,
+    name: account.name,
     age: 0,
-    email: "navn.navnesen@email.com",
+    email: account.username,
     phoneNumber: 0,
     linkedInUrl: "",
     imgUrl: "",
@@ -25,11 +28,10 @@ const Register: React.FC<Props> = ({setUserInformation}) => {
     isEmployer: false
   }
   
-  const [isUserCreated, setIsUserCreated] = useState(false);
 
   const createProfile = () => {
     const profile = new Profile(
-      profileForm.name, profileForm.age, profileForm.email, 
+      profileForm.name!, profileForm.age, profileForm.email, 
       profileForm.phoneNumber, profileForm.linkedInUrl, 
       profileForm.imgUrl, profileForm.education, 
       profileForm.descriptionTitle, profileForm.description, 
@@ -40,12 +42,36 @@ const Register: React.FC<Props> = ({setUserInformation}) => {
 
     setUserInformation(userInformation);
 
-    //------ UPDATE TO DATABASE ------- //
+    //------ UPLOAD IMAGE TO DATABASE ----- //
+    
+    // Remember to update the profileForm.imgUrl to this url.
 
+    //------------------------------------- //
+
+    //------ UPDATE TO DATABASE ------- //
     
     // -------------------------------- //
     
   } 
+
+  const [imagePath, setImagePath] = useState<any>("");
+  const takePicture = async() => {
+    try {
+      const cameraResult = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: true,
+        resultType: CameraResultType.Uri
+      })
+  
+      const path = cameraResult?.path || cameraResult?.webPath
+      setImagePath(path);
+      console.log(path);
+      return true;
+    } catch (e: any){
+      console.log(e);
+    }
+    
+  }
   
   const openLibrary = async () => {
     const imageResponse: string[] = [];
@@ -58,7 +84,6 @@ const Register: React.FC<Props> = ({setUserInformation}) => {
       }
     });
     profileForm.imgUrl = imageResponse[0];
-    console.log(profileForm.imgUrl);
   }
 
   return (
@@ -113,22 +138,15 @@ const Register: React.FC<Props> = ({setUserInformation}) => {
           </IonItem>
 
           <IonItemDivider>Upload Image</IonItemDivider>
-
+          <IonThumbnail>
+              <IonImg src={imagePath}/>
+          </IonThumbnail>
           <IonItem>
-
-            <IonButton onClick={() => openLibrary()}>Upload Profile Image</IonButton>
+            <IonButton onClick={takePicture}>Upload Profile Picture</IonButton>
           </IonItem>
           <IonItem>
-          <IonButton onClick={() => createProfile()}>Create Profile</IonButton>
-          {/* {isUserCreated ? (
-            <IonButton href="/">Continue</IonButton>
-          ) : (
             <IonButton onClick={() => createProfile()}>Create Profile</IonButton>
-          )} */}
           </IonItem>
-          {/* <IonItem>
-            <IonButton onClick={() => console.log(userInformation.getProfile())}>Check info</IonButton>
-          </IonItem> */}
         </IonList>
       </IonContent>      
       

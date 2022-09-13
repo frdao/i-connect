@@ -15,7 +15,7 @@ import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 import Login from './pages/Login';
-import { useIsAuthenticated } from "@azure/msal-react";
+import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -87,12 +87,13 @@ const LoggedIn: React.FC<Props> = (userInformation) => {
 };
 
 const App: React.FC = () => {
+  const {accounts} = useMsal();
   const isAuthenticated = useIsAuthenticated();
   const [userInformation, setUserInformation] = useState(new UserInformation());
 
-  if (userInformation.getProfile() != null) {
+  if (isAuthenticated && userInformation.getProfile() != null) {
     return(
-      <Register setUserInformation={setUserInformation} />
+      <Register setUserInformation={setUserInformation} account={accounts[0]} />
     )
   }
   else if(isAuthenticated) {

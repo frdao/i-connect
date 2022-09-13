@@ -4,3 +4,9 @@
     bottom: 0;
     right: 0;
 }
+
+ion-thumbnail {
+    --size: 200px;
+    --border-radius: 14px;
+    margin: auto;
+}

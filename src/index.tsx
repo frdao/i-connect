@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { PublicClientApplication } from "@azure/msal-browser";
 import { MsalProvider } from "@azure/msal-react";
 import { msalConfig } from "./authConfig";
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
 const msalInstance = new PublicClientApplication(msalConfig);
 
@@ -18,6 +19,8 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+defineCustomElements(window);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
