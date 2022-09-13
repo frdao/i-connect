@@ -10,12 +10,12 @@ public static class ChatThread
     /// <param name="topic">Topic for the chat thread</param>
     /// <param name="userName">Display name for the user in the thread</param>
     public static async Task<CreateChatThreadResult> CreateChatThread( 
+        ChatClient chatClient,
         string userID,
         string token, 
         string topic = "Example Topic",
         string userName = "Default Danny")
     {
-        ChatClient chatClient = CreateClient(Constants.Endpoints.CommunicationServiceEndoint, token);
 
         // Creates a chat participant for the new thread
         ChatParticipant chatParticipant = CreateUser(userID, userName);
@@ -65,7 +65,7 @@ public static class ChatThread
     /// </summary>
     /// <param name="chatThreadClient">The thread you want to send a message to</param>
     /// <param name="message">Content of the message</param>
-    public static async Task<SendChatMessageResult> SendChatMessage(ChatThreadClient chatThreadClient, string message = "No message:(")
+    public static async Task<Response<SendChatMessageResult>> SendChatMessage(ChatThreadClient chatThreadClient, string message = "No message:(")
     {
         SendChatMessageOptions sendChatMessageOptions = new SendChatMessageOptions()
         {

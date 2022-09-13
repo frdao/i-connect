@@ -2,6 +2,7 @@
 using Azure.Communication;
 using Azure.Communication.Chat;
 using System;
+using Constants;
 
 namespace ChatService
 {
@@ -9,16 +10,21 @@ namespace ChatService
     {
         static async System.Threading.Tasks.Task Main(string[] args)
         {
-            var UserAndToken = AccessTokenGenerator.CreateUserAndToken();
-            Console.WriteLine(UserAndToken);
+            AuthenticatedUser user = AccessTokenGenerator.CreateUserAndToken();
 
             // TESTING
-            //CreateChatThreadResult thread = await ChatThread.CreateChatThread(
-            //    Constants.Player1.Id,
-            //    Constants.Player1.Token
-            //);
+            ChatClient chatClient = ChatThread.CreateClient(Constants.Endpoints.CommunicationServiceEndoint, user.Token);
+            CreateChatThreadResult thread = await ChatThread.CreateChatThread(
+                chatClient,
+                user.UserId,
+                user.Token
+            );
+            ChatThreadClient chatThreadClient = chatClient.GetChatThreadClient(threadId: thread.ChatThread.Id);
 
-            //Console.WriteLine($"{thread}");
+            var message1 = await ChatThread.SendChatMessage(chatThreadClient, "First message");
+            var message2 = await ChatThread.SendChatMessage(chatThreadClient, "second message");
+
+            ChatThread.GetChatMessages(chatThreadClient);
         }
             
     }

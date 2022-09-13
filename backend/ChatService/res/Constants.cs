@@ -1,5 +1,11 @@
 namespace Constants
 {
+    public struct AuthenticatedUser
+    {
+        public string UserId;
+        public string Token;
+        public DateTimeOffset ExpiresOn;
+    }
     public static class Endpoints 
     {
         public const string CommunicationServiceEndoint = "https://chaticonnect.communication.azure.com";
